@@ -18,7 +18,7 @@ on:
 
 env:
   # Use docker.io for Docker Hub if empty
-  REGISTRY: https://registry.liwanetworks.com/
+  REGISTRY: registry.liwanetworks.com
   #REGISTRY: docker.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: mohamed/nextjs-demo
