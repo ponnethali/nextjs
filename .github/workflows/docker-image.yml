@@ -26,11 +26,12 @@ jobs:
       run: docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG}}
     
     - name: Log into registry ${{ env.REGISTRY }}
-        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
+      run: docker login ${{ env.REGISTRY }} --username=${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
+     #   uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+     #   with:
+      #    registry: ${{ env.REGISTRY }}
+       #   username: ${{ secrets.REGISTRY_USERNAME }}
+        #  password: ${{ secrets.REGISTRY_PASSWORD }}
           
       
     - name: Push the Docker image
