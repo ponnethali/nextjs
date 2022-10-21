@@ -1,0 +1,38 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: registry.liwanetworks.com
+  #REGISTRY: docker.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: mohamed/nextjs-demo
+  #IMAGE_NAME: aliponneth/nextjs-demo1
+  IMAGE_TAG: 1.0.${{ github.run_number }}
+  
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Log into registry ${{ env.REGISTRY }}
+        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+          
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG}}
+      
+    - name: Push the Docker image
+      run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG}}
+    
