@@ -11,7 +11,7 @@ on: [workflow_dispatch]
     
 env:
   REGISTRY: registry.liwanetworks.com
-  IMAGE_NAME: mohamed/nextjs-demo
+  IMAGE_NAME: mohamed/nextjs-demo1
   IMAGE_TAG: 1.0.${{ github.run_number }}
   
 jobs:
@@ -23,7 +23,7 @@ jobs:
       packages: write
       id-token: write
       
-       steps:
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         
