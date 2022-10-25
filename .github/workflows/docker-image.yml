@@ -29,7 +29,7 @@ jobs:
   deployment:
   
     runs-on: ubuntu-latest
-    environment: deployment
+    environment: production    #deployment
     needs: build
     
     steps:
